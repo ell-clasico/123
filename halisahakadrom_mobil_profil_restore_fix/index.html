@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halı Saha Kadrom PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="./js/firebase.js" defer></script>
+<script src="./js/config.js" defer></script>
+<script src="./js/ui.js" defer></script>
+<script src="./js/auth.js" defer></script>
+<script src="./js/dashboard.js" defer></script>
+<script src="./js/players.js" defer></script>
+<script src="./js/stats.js" defer></script>
+<script src="./js/kadro.js" defer></script>
+<script src="./js/pro-kadro.js" defer></script>
+<script src="./js/admin.js" defer></script>
+<script src="./js/advanced.js" defer></script>
+<script src="./js/advanced-v2.js" defer></script>
+<script src="./js/main.js" defer></script>
+<script src="./js/mobile-profile-v2.js" defer></script>
+<script src="./js/mobile-login-nav-fix.js" defer></script>
+
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./mobile-profile-v2.css">
+<style>
+
+#editMatchSize {
+    background: rgba(255,255,255,0.08) !important;
+    border: 2px solid rgba(255,255,255,0.1) !important;
+}
+#editMatchSize option {
+    background: #0d0620;
+    color: #fff;
+}
+
+/* =============================================
+   DASHBOARD STİLLERİ
+============================================= */
+#dashboard .profil-box {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 28px auto;
+    padding: 25px;
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+    border-radius: 22px;
+    box-shadow: 0 0 20px #8a2be2;
+    background: none !important;
+    text-align: center;
+}
+
+#dashboard .profil-left {
+    width: 280px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+    background: none !important;
+    margin-top: -30px !important;
+}
+
+#dashboard .profil-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    min-width: 270px;
+}
+
+#dashboard .fut-card {
+    margin-top: -20px !important;
+}
+
+#dashboard .photo-actions {
+    margin-top: -40px !important;
+}
+
+@media (max-width: 750px) {
+    #dashboard .profil-box {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    #dashboard .profil-left,
+    #dashboard .profil-right {
+        width: 100% !important;
+        min-width: unset !important;
+    }
+}
+#dashboard.page {
+    max-width: 1100px !important;
+}
+
+.dash-layout {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+.dash-profile-col {
+    width: 420px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(138,43,255,0.3);
+    border: 1px solid rgba(138,43,255,0.3);
+}
+
+.dash-groups-col {
+    flex: 1;
+    min-width: 0;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 0 20px rgba(138,43,255,0.2);
+    border: 1px solid rgba(138,43,255,0.2);
+}
+
+.dash-profile-col .profil-box {
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.dash-profile-col .profil-left {
+    width: 100% !important;
+    min-width: unset !important;
+    margin-top: 0 !important;
+}
+
+.dash-profile-col .profil-right {
+    width: 100% !important;
+    min-width: unset !important;
+    margin-top: 16px;
+}
+
+.dash-profile-col .fut-card {
+    margin-top: 0 !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dash-profile-col .photo-actions {
+    margin-top: 16px !important;
+    width: 100%;
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dash-profile-col .fm-wrapper {
+    width: 100%;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .dash-layout { flex-direction: column; }
+    .dash-profile-col { width: 100%; position: static; }
+}
+
+.dash-section { margin-bottom: 32px; }
+
+.dash-section h3 {
+    font-size: 18px; font-weight: 700; color: #a78bfa;
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(138,43,255,0.3);
+}
+
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+
+.group-card {
+    background: rgba(138,43,255,0.15);
+    border: 1.5px solid rgba(138,43,255,0.4);
+    border-radius: 16px; padding: 20px 16px;
+    cursor: pointer; transition: 0.2s;
+    text-align: center; position: relative;
+}
+
+.group-card:hover {
+    background: rgba(138,43,255,0.25);
+    border-color: #a347ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(138,43,255,0.4);
+}
+
+.group-card-icon { font-size: 32px; margin-bottom: 10px; }
+.group-card-name { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+.group-card-role { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+.group-card-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: #ff3b3b; color: white;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 7px; border-radius: 20px;
+}
+
+.group-card-add {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px dashed rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.5);
+}
+.group-card-add:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.4);
+    color: white; box-shadow: none;
+}
+
+.dash-search-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.dash-search-row input { flex: 1; margin-top: 0; }
+.dash-search-row button { width: auto; padding: 14px 24px; margin-top: 0; font-size: 15px; }
+
+.search-result-item {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 10px;
+}
+
+.search-result-info h4 { margin: 0 0 4px 0; font-size: 15px; font-weight: 700; }
+.search-result-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+.search-result-btn {
+    padding: 8px 18px; border-radius: 8px;
+    border: 1.5px solid #a347ff; background: transparent;
+    color: white; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: 0.2s; white-space: nowrap;
+    font-family: Poppins, sans-serif;
+}
+.search-result-btn:hover { background: rgba(138,43,255,0.3); }
+.search-result-btn.sent { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); cursor: default; }
+.search-result-btn.member { border-color: #4ade80; color: #4ade80; cursor: default; }
+
+.dash-modal {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+    z-index: 1000; align-items: center; justify-content: center;
+}
+.dash-modal.open { display: flex; }
+
+.dash-modal-content {
+    background: rgba(20,10,40,0.97);
+    border: 1px solid rgba(138,43,255,0.4);
+    border-radius: 20px; padding: 28px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 0 40px rgba(138,43,255,0.3);
+}
+.dash-modal-content h3 { margin: 0 0 20px 0; font-size: 20px; font-weight: 700; }
+
+.dash-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+.dash-modal-actions button { flex: 1; margin-top: 0; }
+
+.btn-cancel {
+    border-color: rgba(255,255,255,0.2) !important;
+    box-shadow: none !important;
+    color: rgba(255,255,255,0.6) !important;
+}
+
+.request-item {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 12px 16px; margin-bottom: 10px;
+}
+.request-info h4 { margin: 0 0 3px 0; font-size: 14px; font-weight: 700; }
+.request-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+.request-actions { display: flex; gap: 8px; }
+
+.btn-accept {
+    padding: 7px 14px; border-radius: 8px;
+    border: 1.5px solid #4ade80; background: transparent;
+    color: #4ade80; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: 0.2s; font-family: Poppins, sans-serif;
+}
+.btn-accept:hover { background: rgba(74,222,128,0.15); }
+
+.btn-reject {
+    padding: 7px 14px; border-radius: 8px;
+    border: 1.5px solid #ff3b3b; background: transparent;
+    color: #ff3b3b; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: 0.2s; font-family: Poppins, sans-serif;
+}
+.btn-reject:hover { background: rgba(255,59,59,0.15); }
+
+.dash-empty {
+    text-align: center; color: rgba(255,255,255,0.35);
+    font-size: 14px; padding: 20px 0;
+}
+
+.auth-tabs {
+    display: flex; margin-bottom: 24px;
+    border-radius: 12px; overflow: hidden;
+    border: 1.5px solid rgba(138,43,255,0.4);
+}
+.auth-tab {
+    flex: 1; padding: 12px; background: transparent; border: none;
+    color: rgba(255,255,255,0.5); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: 0.2s; font-family: Poppins, sans-serif;
+}
+.auth-tab.active { background: rgba(138,43,255,0.3); color: white; }
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+
+@media (max-width: 750px) {
+    .group-grid { grid-template-columns: repeat(2, 1fr); }
+    .dash-search-row { flex-direction: column; }
+    .dash-search-row button { width: 100%; }
+}
+#guestPlayerMainPos,
+#guestPlayerSubPos {
+    background: rgba(255,255,255,0.08) !important;
+    border: 2px solid #8a2bff !important;
+    border-radius: 12px !important;
+}
+
+#guestPlayerMainPos option,
+#guestPlayerSubPos option {
+    background: #0d0620;
+    color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div id="notify" class="notify">Kaydedildi</div>
+<div class="bg"></div>
+
+<!-- =============================================
+     AUTH EKRANI
+============================================= -->
+<div id="authPage" class="page login-box active" style="display: block;">
+    <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:28px; font-weight:900; color:white;">
+            Halısaha<span style="color:#a78bfa;">Kadrom</span>
+        </div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:4px;">Halı saha yönetim platformu</div>
+    </div>
+
+    <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab(&#39;login&#39;)">Giriş Yap</button>
+        <button class="auth-tab" onclick="switchAuthTab(&#39;register&#39;)">Kayıt Ol</button>
+    </div>
+
+    <div id="authLoginForm" class="auth-form active">
+        <input id="loginEmail" type="email" placeholder="E-posta">
+        <input id="loginPassword" type="password" placeholder="Şifre">
+        <button class="btn" onclick="loginUser()">Giriş Yap</button>
+        <button class="btn btn-cancel" style="margin-top:8px;" onclick="showForgotModal()">Şifremi Unuttum</button>
+    </div>
+
+    <div id="authRegisterForm" class="auth-form">
+    <input id="regDisplayName" placeholder="Kullanıcı Adın (Takım arkadaşların görecek)">
+    <input id="regEmailNew" type="email" placeholder="E-posta">
+    <input id="regPasswordNew" type="password" placeholder="Şifre (min 6 karakter)">
+    <div style="margin-top:12px;padding:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(138,43,255,0.3);border-radius:10px;">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="kvkkCheck" style="width:16px;height:16px;min-width:16px;margin-top:2px;accent-color:#8a2bff;cursor:pointer;">
+            <span style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;">
+                <a href="./kvkk.html" target="_blank" style="color:#a78bfa;">KVKK Aydınlatma Metni</a>'ni okudum ve kişisel verilerimin işlenmesine açık rıza veriyorum.
+                <a href="./gizlilik-politikasi.html" target="_blank" style="color:#a78bfa;">Gizlilik Politikası</a> ve
+                <a href="./kullanim-kosullari.html" target="_blank" style="color:#a78bfa;">Kullanım Koşulları</a>'nı kabul ediyorum.
+            </span>
+        </label>
+    </div>
+    <button class="btn" onclick="registerUser()">Kayıt Ol</button>
+</div>
+</div>
+
+<!-- Şifremi unuttum modal -->
+<div id="forgotModal" class="dash-modal">
+    <div class="dash-modal-content">
+        <h3>🔑 Şifremi Unuttum</h3>
+        <input id="forgotEmailInput" type="email" placeholder="E-posta adresin">
+        <div class="dash-modal-actions">
+            <button class="btn btn-cancel" onclick="closeForgotModal()">İptal</button>
+            <button class="btn" onclick="sendForgotEmail()">Gönder</button>
+        </div>
+    </div>
+</div>
+
+<!-- =============================================
+     DASHBOARD
+============================================= -->
+<div id="dashboard" class="page" style="display:none;">
+
+    <!-- PROFİL BÖLÜMÜ -->
+    <div id="dashProfilePanel" style="display:none; margin-bottom:28px;">
+        <div class="profil-box">
+            <div class="profil-left">
+                <div class="fut-card">
+                    <img class="fut-bg" src="./img/kart.png">
+                    <div class="fut-top">
+                        <div class="fut-ovr" id="dashProfileOVR">0</div>
+                        <div class="fut-pos" id="dashProfilePos">-</div>
+                    </div>
+                    <img id="dashProfilePhoto" src="./img/profil.png"
+                        style="position:absolute;top:170px;left:50%;transform:translateX(-50%);
+                        width:100px;height:100px;border-radius:10px;object-fit:cover;
+                        border:3px solid #ffd700;box-shadow:0 0 12px rgba(0,0,0,0.9);z-index:5;">
+                    <div class="fut-name" id="dashProfileName">OYUNCU</div>
+                    <div class="fut-stats">
+                        <div><b id="dash-hiz"></b> HIZ</div>
+                        <div><b id="dash-sut"></b> ŞUT</div>
+                        <div><b id="dash-pas"></b> PAS</div>
+                        <div><b id="dash-kondisyon"></b> KON</div>
+                        <div><b id="dash-defans"></b> DEF</div>
+                        <div><b id="dash-fizik"></b> FİZ</div>
+                    </div>
+                </div>
+                <div class="photo-actions">
+                    <input id="dashProfilUpload" type="file" accept="image/*" hidden>
+                    <button class="btn" onclick="document.getElementById('dashProfilUpload').click()">Fotoğraf Seç</button>
+                    <button class="btn" onclick="updateDashPhoto()">Fotoğrafı Güncelle</button>
+                </div>
+            </div>
+            <div class="profil-right">
+                <div class="fm-wrapper">
+                    <div class="fm-field">
+                        <div class="fm-card dash-pos" data-pos="ST" data-name="Santrafor">Santrafor</div>
+                        <div class="fm-card dash-pos" data-pos="CM" data-name="Merkez Orta">Merkez Orta</div>
+                        <div class="fm-card dash-pos" data-pos="LW" data-name="Sol Kanat">Sol Kanat</div>
+                        <div class="fm-card dash-pos" data-pos="RW" data-name="Sağ Kanat">Sağ Kanat</div>
+                        <div class="fm-card dash-pos" data-pos="LB" data-name="Sol Bek">Sol Bek</div>
+                        <div class="fm-card dash-pos" data-pos="CB" data-name="Stoper">Stoper</div>
+                        <div class="fm-card dash-pos" data-pos="RB" data-name="Sağ Bek">Sağ Bek</div>
+                        <div class="fm-card dash-pos" data-pos="GK" data-name="Kaleci">Kaleci</div>
+                    </div>
+                    <div class="fm-selection">
+                        <div class="fm-input-group"><label>Asıl Mevki</label><input id="dashMainPos" readonly></div>
+                        <div class="fm-input-group"><label>Yedek Mevki</label><input id="dashSubPos" readonly></div>
+                        <button class="btn" onclick="saveDashPositions()">Mevkileri Kaydet</button>
+                    </div>
+        <div id="formStatusBox" style="margin-top:16px;background:rgba(255,255,255,0.06);border:1px solid rgba(138,43,255,0.28);border-radius:14px;padding:14px;display:none;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;">
+                <h3 style="margin:0;font-size:16px;color:#a78bfa;">📈 Form Durumu</h3>
+                <span id="formStatusBadge" style="font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;background:rgba(138,43,255,0.18);color:#fff;">-</span>
+            </div>
+            <div id="formStatusContent" style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.78);">Form analizi yükleniyor...</div>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRUP BÖLÜMÜ -->
+    <div class="dash-section">
+        <h3>⚽ Halısahalarım</h3>
+        <div id="myGroupsGrid" class="group-grid">
+            <div class="dash-empty">Yükleniyor...</div>
+        </div>
+    </div>
+    <div class="dash-section">
+        <h3>🔍 Grup Ara &amp; Katıl</h3>
+        <div class="dash-search-row">
+            <input id="groupSearchInput" placeholder="Grup adı veya kodu yaz...">
+            <button class="btn" onclick="searchGroups()">Ara</button>
+        </div>
+        <div id="groupSearchResults"></div>
+    </div>
+    <div class="dash-section">
+        <h3>➕ Yeni Grup Oluştur</h3>
+        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:12px;">
+            Kendi halı saha grubunu oluştur, arkadaşlarını davet et.
+        </p>
+        <button class="btn" onclick="openCreateGroupModal()">Halı Saha Grubu Oluştur</button>
+    </div>
+    <div style="margin-top:10px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);">
+        <button class="btn" style="border-color:#ff3b3b;color:#ff6a6a;box-shadow:0 0 10px rgba(255,59,59,0.3);" onclick="logoutUser()">Çıkış Yap</button>
+    </div>
+
+</div>
+
+<!-- Grup oluştur modal -->
+<div id="createGroupModal" class="dash-modal">
+    <div class="dash-modal-content">
+        <h3>🏟️ Yeni Halı Saha Grubu</h3>
+        <input id="newGroupName" placeholder="Halı Saha Grubu İsmi">
+        <div class="dash-modal-actions">
+            <button class="btn btn-cancel" onclick="closeCreateGroupModal()">İptal</button>
+            <button class="btn" onclick="createGroup()">Oluştur</button>
+        </div>
+    </div>
+</div>
+
+<!-- =============================================
+     ESKİ COMPAT SAYFALAR (migration)
+============================================= -->
+<div id="login" class="page login-box" style="display:none;"></div>
+<div id="register" class="page login-box" style="display:none;"></div>
+<div id="forgot" class="page login-box" style="display:none;">
+    <h2>Bilgilerimi Unuttum</h2>
+    <input id="forgotCode" type="text" placeholder="Halı Saha Kodu" autocomplete="off">
+    <input id="forgotEmail" type="email" placeholder="E-posta" autocomplete="off">
+    <input id="forgotUsername" type="text" placeholder="Kullanıcı Adı" autocomplete="off">
+    <button class="btn" onclick="forgotSend()">Gönder</button>
+    <div class="login-divider"></div>
+    <button class="btn btn-cancel" onclick="showAuthPage()">Geri Dön</button>
+</div>
+<div id="join" class="page login-box" style="display:none;"></div>
+
+<!-- =============================================
+     NAVIGATION — MASAÜSTÜ
+============================================= -->
+<div id="navbar" class="nav desktop-nav" style="display:none;">
+    <div class="nav-logo" onclick="goToDashboard()" style="cursor:pointer;">
+        <div class="nav-logo-icon">H</div>
+        <span class="nav-logo-text">Halısaha<strong>Kadrom</strong></span>
+    </div>
+    <div class="nav-links">
+			<div class="nav-group">
+    <button class="nav-group-btn">👤 Profil</button>
+    <div class="nav-dropdown">
+        <button id="profilBtn" onclick="goToDashboard()">Profilim/Gruplarım</button>
+        <button id="adminBtn" style="display:none;" onclick="showPage('admin')">Admin Paneli</button>
+        <button id="gaBtn" style="display:none;" onclick="showPage('gaYonetim')">Gol Yönetimi</button>
+        <button id="winBtn" style="display:none;" onclick="showPage('kazananYonetim')">Kazanan Yönetimi</button>
+    </div>
+</div>
+        <button class="nav-direct" onclick="showPage(&#39;oyuncular&#39;)">⚽ Oyuncular</button>
+        <div class="nav-group">
+            <button class="nav-group-btn">🗓 Kadro</button>
+            <div class="nav-dropdown">
+                <button onclick="showPage(&#39;haftaninKadro&#39;)">Haftanın Kadrosu</button>
+                <button id="kadroBtn" style="display:none;" onclick="showPage(&#39;kadro&#39;)">Kadro Oluştur</button>
+            </div>
+        </div>
+        <div class="nav-group">
+            <button class="nav-group-btn">📊 İstatistik</button>
+            <div class="nav-dropdown">
+                <button onclick="showPage(&#39;gecmis&#39;)">Puan Geçmişi</button>
+                <button onclick="showPage('formAnalizi')">Form Analizi</button>
+                <button onclick="showPage('chemistry')">Chemistry</button>
+                <button onclick="showPage('market')">Market Değeri</button>
+                <button onclick="showPage('proLigMotoru')">Pro Lig Motoru</button>
+            </div>
+        </div>
+
+        <div class="nav-group">
+            <button class="nav-group-btn">🚀 Gelişmiş</button>
+            <div class="nav-dropdown">
+                <button onclick="showPage('karsilastirma')">Oyuncu Karşılaştır</button>
+                <button onclick="showPage('attendanceTahmin')">Katılım Tahmini</button>
+                <button onclick="showPage('sosyalPro')">Sosyal Pro</button>
+                <button onclick="showPage('pushMerkezi')">Akıllı Bildirim</button>
+            </div>
+        </div>
+
+        <button class="logout-item" onclick="logoutUser()">Çıkış Yap</button>
+    </div>
+</div>
+
+<!-- =============================================
+     UYGULAMA SAYFALARI
+============================================= -->
+<div id="profilim" class="page" style="display: none;">
+<h2>Profilim</h2>
+<div class="profil-box">
+<div class="profil-left">
+<div class="fut-card">
+<img class="fut-bg" src="./img/kart.png">
+<div class="fut-top">
+<div class="fut-ovr" id="fifa-overall">0</div>
+<div class="fut-pos" id="fifa-position">-</div>
+</div>
+<img id="fifa-photo" src="./img/profil.png" style="position:absolute;top:170px;left:50%;transform:translateX(-50%);
+width:100px;height:100px;border-radius:10px;object-fit:cover;
+border:3px solid #ffd700;box-shadow:0 0 12px rgba(0,0,0,0.9);z-index:5;">
+<div class="fut-name" id="fifa-name">OYUNCU</div>
+<div class="fut-stats">
+<div><b id="fifa-hiz"></b> HIZ</div>
+<div><b id="fifa-sut"></b> ŞUT</div>
+<div><b id="fifa-pas"></b> PAS</div>
+<div><b id="fifa-kondisyon"></b> KON</div>
+<div><b id="fifa-defans"></b> DEF</div>
+<div><b id="fifa-fizik"></b> FİZ</div>
+</div>
+</div>
+<div class="photo-actions">
+<input id="profilUpload" type="file" accept="image/*" hidden="">
+<button id="selectFileBtn" class="btn">Fotoğraf Seç</button>
+<button class="btn" onclick="updatePhoto()">Fotoğrafı Güncelle</button>
+</div>
+</div>
+<div class="profil-right">
+<div class="fm-wrapper">
+<div class="fm-field">
+<div class="fm-card" data-pos="ST" data-name="Santrafor">Santrafor</div>
+<div class="fm-card" data-pos="CM" data-name="Merkez Orta">Merkez Orta</div>
+<div class="fm-card" data-pos="LW" data-name="Sol Kanat">Sol Kanat</div>
+<div class="fm-card" data-pos="RW" data-name="Sağ Kanat">Sağ Kanat</div>
+<div class="fm-card" data-pos="LB" data-name="Sol Bek">Sol Bek</div>
+<div class="fm-card" data-pos="CB" data-name="Stoper">Stoper</div>
+<div class="fm-card" data-pos="RB" data-name="Sağ Bek">Sağ Bek</div>
+<div class="fm-card" data-pos="GK" data-name="Kaleci">Kaleci</div>
+</div>
+<div class="fm-selection">
+<div class="fm-input-group"><label>Asıl Mevki</label><input id="mainPos" readonly=""></div>
+<div class="fm-input-group"><label>Yedek Mevki</label><input id="subPos" readonly=""></div>
+<div class="trait-section">
+  <label>Karakteristik Özellikler <small>(en fazla 3)</small></label>
+  <div id="profileTraitPicker" class="trait-picker"></div>
+</div>
+<button class="btn" onclick="savePositions()">Mevki ve Özellikleri Kaydet</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="oyuncular" class="page" style="display: none;">
+<h2>Oyuncular</h2>
+<div id="oyuncuListe" class="card-grid"></div>
+</div>
+
+<div id="haftaninKadro" class="page" style="display: none;">
+<div id="weekNoteBox" style="display:none;width:100%;margin:20px 0;padding:15px;
+background:rgba(255,255,255,0.08);border:3px solid #a347ff;color:white;
+border-radius:6px;backdrop-filter:blur(4px);text-align:center;text-shadow:0 0 4px black;position:relative;">
+<div id="matchSahaBox" style="font-size:18px;font-weight:800;margin-bottom:6px;"></div>
+<div id="matchTarihSaatBox" style="font-size:15px;margin-bottom:4px;"></div>
+<div id="matchKonumBox" style="font-size:14px;margin-bottom:6px;"></div>
+</div>
+<div class="haftaninLayout">
+<div class="teamBox leftBox"><h3>A Takımı</h3><div id="haftaTeamA" class="hk-list"></div></div>
+<div class="fieldCenter">
+<div id="fieldContainer">
+<img src="./img/sahayatay.jpg" id="fieldImg">
+<div id="playersOnField"></div>
+</div>
+</div>
+<div class="teamBox rightBox"><h3>B Takımı</h3><div id="haftaTeamB" class="hk-list"></div></div>
+</div>
+<div id="weeklyMatchResultPanel" class="weekly-result-panel" style="display:none;"></div>
+<div id="weeklyRatingPanel" class="weekly-rating-panel" style="display:none;"></div>
+<div id="takimAnalizBox" style="display:none;margin:20px 0;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+<h3 style="margin:0;font-size:18px;">⚡ Maç Analizi</h3>
+<div style="display:flex;gap:8px;align-items:center;">
+<button onclick="generateTeamAnalysis()" id="analizBtn" style="background:linear-gradient(135deg,#8a2bff,#b46aff);border:none;color:white;padding:8px 20px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;box-shadow:0 0 12px #8a2bff;">🤖 Analiz Et</button>
+<button onclick="hideAnaliz()" style="background:transparent;border:2px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:8px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;">✕</button>
+</div>
+</div>
+<div id="analizContent" style="background:rgba(255,255,255,0.07);border:2px solid rgba(138,43,255,0.5);border-radius:14px;padding:18px;color:#f0f0f0;font-size:15px;line-height:1.7;min-height:60px;">
+<span style="color:#aaa;font-style:italic;">Kadro oluşturulduktan sonra "Analiz Et" butonuna tıkla.</span>
+</div>
+</div>
+<div id="userAttendancePanel" style="margin-top:20px;">
+<h3>Bu Hafta Maça Geliyor musun?</h3>
+<button id="toggleComingListBtn" class="comingToggleBtn">👥 Gelenleri Gör</button>
+<div id="comingListBox" class="comingListPanel">
+<div class="comingHeader">Bu Hafta Maça Gelecekler</div>
+<div id="comingList" class="comingItems"></div>
+</div>
+<div id="comingBox" class="coming-container">
+<label class="switch"><input type="checkbox" id="comingCheck"><span class="slider"></span></label>
+<span class="comingText">Maça geliyorum</span>
+<div id="comingStatus" class="coming-status"></div>
+</div>
+<button id="comingSaveBtn" class="btn">Kaydet</button>
+</div>
+</div>
+
+<div id="kadro" class="page" style="display: none;">
+<h2>Kadro Oluştur</h2>
+<div class="kadroWidget">
+<div style="margin:10px 0 14px;">
+<label class="custom-display">Katılım Sayısı</label>
+<select class="custom-select" id="matchSizeSelect" style="width:100%;padding:10px;border-radius:6px;border:none;margin-top:6px;background:rgba(255,255,255,0.15);color:white;">
+<option value="6">Katılımcı Sayısı: 6/6</option>
+<option value="7">Katılımcı Sayısı: 7/7</option>
+<option value="8" selected="">Katılımcı Sayısı: 8/8</option>
+<option value="9">Katılımcı Sayısı: 9/9</option>
+<option value="10">Katılımcı Sayısı: 10/10</option>
+<option value="11">Katılımcı Sayısı: 11/11</option>
+</select>
+</div>
+<div class="pro-kadro-controls">
+  <div>
+    <label class="custom-display">Kadro Modu</label>
+    <select id="proKadroMode" class="custom-select native-pro-select">
+      <option value="balanced">Profesyonel Dengeli</option>
+      <option value="position">Pozisyon Odaklı</option>
+      <option value="form">Form Odaklı</option>
+      <option value="competitive">Rekabetçi</option>
+      <option value="randomBalanced">Rastgele Dengeli</option>
+    </select>
+  </div>
+  <div id="proKadroExplain" class="pro-kadro-explain">Profesyonel algoritma: OVR, pozisyon uyumu, form, karakteristik rol, chemistry ve takım dengesi birlikte hesaplanır.</div>
+</div>
+<div id="kadroPlayerGrid" class="player-grid"></div>
+<div class="gkRow">
+<label>A Takımı Kalecisi</label>
+<div class="custom-select" id="gkASelect" data-id="gkA"><div class="custom-display">Kaleci Seç</div><div class="custom-options" style="display: none;"></div></div>
+<label>B Takımı Kalecisi</label>
+<div class="custom-select" id="gkBSelect" data-id="gkB"><div class="custom-display">Kaleci Seç</div><div class="custom-options" style="display: none;"></div></div>
+</div>
+<button id="buildBtn">KADROYU OLUŞTUR</button>
+<div style="margin-bottom:15px;display:flex;flex-direction:column;gap:10px;">
+<div><label style="color:white;font-size:14px;font-weight:600;">🏟️ Saha İsmi</label>
+<input id="matchSahaInput" type="text" placeholder="Örn: Feriköy Halı Saha" style="width:100%;padding:10px;border-radius:6px;border:none;margin-top:5px;background:rgba(255,255,255,0.15);color:white;"></div>
+<div style="display:flex;gap:10px;">
+<div style="flex:1;"><label style="color:white;font-size:14px;font-weight:600;">📅 Tarih</label>
+<input id="matchTarihInput" type="date" style="width:100%;padding:10px;border-radius:6px;border:none;margin-top:5px;background:rgba(255,255,255,0.15);color:white;color-scheme:dark;"></div>
+<div style="flex:1;"><label style="color:white;font-size:14px;font-weight:600;">⏰ Saat</label>
+<input id="matchSaatInput" type="time" style="width:100%;padding:10px;border-radius:6px;border:none;margin-top:5px;background:rgba(255,255,255,0.15);color:white;color-scheme:dark;"></div>
+</div>
+<div><label style="color:white;font-size:14px;font-weight:600;">📍 Konum</label>
+<input id="matchKonumInput" type="text" placeholder="Örn: Feriköy, Şişli / Google Maps linki" style="width:100%;padding:10px;border-radius:6px;border:none;margin-top:5px;background:rgba(255,255,255,0.15);color:white;"></div>
+</div>
+<button class="btn danger" onclick="resetWeek()" style="margin-top:20px;">Yeni Hafta Başlat</button>
+</div>
+</div>
+
+<div id="puan" class="page" style="display: none;">
+<h2>Puan Ver</h2>
+<div class="custom-select" data-id="puanTarget"><div class="custom-display">Oyuncu Seç</div><div class="custom-options" style="display: none;"></div></div>
+<input id="puanValue" type="number" placeholder="Puan (1–10)">
+<button class="btn" onclick="puanGonder()">Gönder</button>
+</div>
+
+<div id="gecmis" class="page" style="display: none;"><h2>Puan Geçmişi</h2><ul id="gecmisList"></ul></div>
+
+
+
+<div id="formAnalizi" class="page advanced-page pro-page" style="display:none;">
+  <div class="pro-hero">
+    <div><span class="pro-eyebrow">PERFORMANS MERKEZİ</span><h2>📈 Form Analizi</h2><p>Gol, galibiyet, puan ve OVR verilerinden canlı form skoru.</p></div>
+    <button class="btn pro-ghost" onclick="renderAdvancedFormPage()">Yenile</button>
+  </div>
+  <div id="advancedFormList" class="advanced-grid pro-grid"></div>
+</div>
+
+
+<div id="chemistry" class="page advanced-page pro-page" style="display:none;">
+  <div class="pro-hero"><div><span class="pro-eyebrow">TAKIM UYUMU</span><h2>🧪 Chemistry</h2><p>Birlikte kazanan oyuncuların uyum skorları.</p></div></div>
+  <div id="chemistryContent" class="advanced-grid pro-grid"></div>
+</div>
+
+<div id="market" class="page advanced-page pro-page" style="display:none;">
+  <div class="pro-hero"><div><span class="pro-eyebrow">OYUNCU DEĞERİ</span><h2>💰 Market Değerleri</h2><p>Form, OVR, gol ve galibiyet katkısına göre otomatik değerleme.</p></div></div>
+  <div id="marketContent" class="advanced-grid pro-grid"></div>
+</div>
+
+<div id="karsilastirma" class="page advanced-page pro-page" style="display:none;">
+  <div class="pro-hero"><div><span class="pro-eyebrow">VS MODU</span><h2>⚔️ Oyuncu Karşılaştırma</h2><p>İki oyuncuyu form, OVR, gol, galibiyet ve piyasa değeriyle kıyasla.</p></div></div>
+  <div class="advanced-panel pro-panel">
+    <div class="compare-controls">
+      <select id="comparePlayerA"></select>
+      <select id="comparePlayerB"></select>
+      <button class="btn" onclick="renderPlayerCompare()">Karşılaştır</button>
+    </div>
+  </div>
+  <div id="compareContent" class="advanced-grid pro-grid"></div>
+</div>
+
+
+<!-- ==========================================================
+     ELITE / V2 GELİŞMİŞ MODÜLLER
+========================================================== -->
+<div id="eliteMerkez" class="page advanced-page elite-page" style="display:none;">
+  <div class="elite-hero">
+    <div>
+      <span class="pro-eyebrow">ELITE CONTROL CENTER</span>
+      <h2>🚀 Gelişmiş Halısaha Merkezi</h2>
+      <p>AI takım dengeleme, ileri istatistik, katılım tahmini, lig motoru, bildirim ve sosyal modüllerin tek ekranı.</p>
+    </div>
+    <button class="btn pro-ghost" onclick="renderEliteCenter()">Yenile</button>
+  </div>
+  <div id="eliteCenterContent" class="elite-grid"></div>
+</div>
+
+
+<div id="attendanceTahmin" class="page advanced-page elite-page" style="display:none;">
+  <div class="elite-hero">
+    <div><span class="pro-eyebrow">TAHMİN</span><h2>🧠 Katılım Tahmini</h2><p>Aktivite, son form ve grup davranışına göre ücretsiz client-side katılım olasılığı.</p></div>
+    <button class="btn pro-ghost" onclick="renderAttendancePrediction()">Tahmini Yenile</button>
+  </div>
+  <div id="attendancePredictionContent" class="elite-grid"></div>
+</div>
+
+<div id="proLigMotoru" class="page advanced-page elite-page" style="display:none;">
+  <div class="elite-hero">
+    <div><span class="pro-eyebrow">SEZON 2.0</span><h2>🏆 Pro Lig Motoru</h2><p>Mevcut gol, galibiyet ve rating verilerinden puan tablosu, form tablosu ve ödüller üretir.</p></div>
+    <button class="btn pro-ghost" onclick="renderProLeagueEngine()">Ligi Hesapla</button>
+  </div>
+  <div id="proLeagueContent" class="elite-grid"></div>
+</div>
+
+<div id="sosyalPro" class="page advanced-page elite-page" style="display:none;">
+  <div class="elite-hero">
+    <div><span class="pro-eyebrow">COMMUNITY+</span><h2>💬 Gelişmiş Sosyal Akış</h2><p>Maç anı, duyuru, MVP oylaması ve local reactions. Ek Firestore maliyeti üretmez.</p></div>
+  </div>
+  <div class="advanced-panel pro-panel">
+    <select id="socialProType">
+      <option value="match">Maç Anı</option>
+      <option value="announcement">Duyuru</option>
+      <option value="mvp">MVP Adayı</option>
+      <option value="banter">Tatlı Rekabet</option>
+    </select>
+    <textarea id="socialProInput" placeholder="Bugünün maçından bir an, duyuru veya yorum..." rows="3"></textarea>
+    <button class="btn" onclick="addProSocialPost()">Paylaş</button>
+  </div>
+  <div id="socialProContent" class="advanced-list"></div>
+</div>
+
+<div id="pushMerkezi" class="page advanced-page elite-page" style="display:none;">
+  <div class="elite-hero">
+    <div><span class="pro-eyebrow">PWA</span><h2>🔔 Akıllı Bildirim Merkezi</h2><p>Server maliyeti olmadan cihaz içi hatırlatma, form uyarısı ve kadro bildirim önerileri.</p></div>
+    <button class="btn pro-ghost" onclick="enableEliteNotifications()">Bildirim İzni İste</button>
+  </div>
+  <div id="pushCenterContent" class="elite-grid"></div>
+</div>
+
+<div id="admin" class="page" style="display: none;">
+<h2>Admin Paneli</h2>
+<div id="pendingRequestsSection" style="margin-bottom:30px;">
+<h3>📬 Bekleyen Katılım İstekleri</h3>
+<div id="pendingRequestsList"><div class="dash-empty">Bekleyen istek yok.</div></div>
+</div>
+<h3>🔗 Davet Linki</h3>
+<p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 10px 0;">
+    Link oluştur, arkadaşına gönder. Yeni link oluşturulunca eski geçersiz olur.
+</p>
+<button class="btn" onclick="generateInviteLink()">🔗 Davet Linki Oluştur</button>
+<div style="display:flex;gap:8px;margin-top:10px;">
+    <input id="inviteLinkBox" type="text" readonly style="display:none;flex:1;margin-top:0;font-size:12px;">
+    <button id="copyInviteBtn" class="btn" onclick="copyInviteLink()" style="display:none;margin-top:0;width:auto;padding:14px 20px;">📋 Kopyala</button>
+</div>
+<hr style="border-color:rgba(255,255,255,0.1);margin:20px 0;">
+<h3>👟 Misafir Oyuncu Ekle</h3>
+<p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 10px 0;">Sadece kadrolara eklenebilir</p>
+<input id="guestPlayerName" placeholder="Oyuncu Adı">
+<button class="btn" onclick="addGuestPlayer()">Misafir Ekle</button>
+
+<h3>🔄 Misafir → Tam Üye Dönüştür</h3>
+<p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 10px 0;">Misafir oyuncuya giriş yetkisi ver</p>
+<div id="guestListForConvert" style="margin-bottom:10px;"></div>
+<input id="convertEmail" type="email" placeholder="E-posta">
+<input id="convertPass" type="password" placeholder="Şifre (min. 6 karakter)">
+<button class="btn" onclick="convertGuestToMember()">Dönüştür</button>
+<h3>🧠 Oyuncu Karakteristiği</h3>
+<p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0 0 10px 0;">Admin diğer oyuncuların oyun karakterini düzenleyebilir. En fazla 3 özellik seç.</p>
+<select id="adminTraitPlayerSelect" class="native-pro-select" style="width:100%;margin-bottom:10px;" onchange="adminLoadPlayerTraits()"></select>
+<div id="adminTraitPicker" class="trait-picker"></div>
+<button class="btn" onclick="adminSavePlayerTraits()">Karakteristiği Kaydet</button>
+<hr style="border-color:rgba(255,255,255,0.1);margin:20px 0;">
+<h3>Oyuncu Sil</h3>
+<div class="custom-select" data-id="deleteUser"><div class="custom-display">Oyuncu Seç</div><div class="custom-options" style="display: none;"></div></div>
+<button class="btn" onclick="deletePlayer()">Sil</button>
+<h3>Tüm Puanları Sıfırla</h3>
+<button class="btn danger" onclick="resetAllPoints()">Puanları Sıfırla</button>
+<div id="loginLogsSection" style="margin-top:20px;">
+<h2>📌 Login Kayıtları</h2>
+<table class="log-table">
+<thead><tr><th>Kullanıcı</th><th>Tarih</th><th>Saat</th></tr></thead>
+<tbody id="loginLogsTable"></tbody>
+</table>
+</div>
+</div>
+
+<div id="gaYonetim" class="page" style="display: none;">
+<h2>Gol Yönetimi</h2>
+<div class="custom-select" data-id="gaPlayer"><div class="custom-display">Oyuncu Seç</div><div class="custom-options" style="display: none;"></div></div>
+<input id="gaGol" type="number" placeholder="Gol">
+<button class="btn" onclick="ekleGolAsist()">Kaydet</button>
+</div>
+
+<div id="kazananYonetim" class="page" style="display: none;">
+<h2>Kazanan Yönetimi</h2>
+<div id="winnerPlayerGrid" class="player-grid"></div>
+<button id="winnerSaveBtn" onclick="kazananKaydet()" class="btn" style="margin-top:20px;">Kazananları Kaydet</button>
+</div>
+
+<!-- PROFİL KURULUM SAYFASI -->
+<!-- PROFİL KURULUM -->
+<div id="profileSetup" class="page" style="display:none;">
+<div class="setup-container">
+
+  <!-- ADIM 1: MEVKİ -->
+  <div id="setupStep1">
+    <div class="setup-header">
+      <div class="setup-step-indicator">
+        <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+      </div>
+      <h2>Mevkini Seç</h2>
+      <p>Sahada hangi pozisyonda oynarsın?</p>
+    </div>
+    <div class="fm-wrapper">
+      <div class="fm-field">
+        <div class="fm-card setup-pos" data-pos="ST" data-name="Santrafor">Santrafor</div>
+        <div class="fm-card setup-pos" data-pos="CM" data-name="Merkez Orta">Merkez Orta</div>
+        <div class="fm-card setup-pos" data-pos="LW" data-name="Sol Kanat">Sol Kanat</div>
+        <div class="fm-card setup-pos" data-pos="RW" data-name="Sağ Kanat">Sağ Kanat</div>
+        <div class="fm-card setup-pos" data-pos="LB" data-name="Sol Bek">Sol Bek</div>
+        <div class="fm-card setup-pos" data-pos="CB" data-name="Stoper">Stoper</div>
+        <div class="fm-card setup-pos" data-pos="RB" data-name="Sağ Bek">Sağ Bek</div>
+        <div class="fm-card setup-pos" data-pos="GK" data-name="Kaleci">Kaleci</div>
+      </div>
+      <div class="fm-selection">
+        <div class="fm-input-group"><label>Asıl Mevki</label><input id="setupMainPos" readonly></div>
+        <div class="fm-input-group"><label>Yedek Mevki</label><input id="setupSubPos" readonly></div>
+      </div>
+    </div>
+    <button class="btn" style="width:100%;margin-top:16px;" onclick="setupGoStep2()">Devam Et →</button>
+  </div>
+
+  <!-- ADIM 2: SORULAR -->
+  <div id="setupStep2" style="display:none;">
+    <div class="setup-header">
+      <div class="setup-step-indicator">
+        <span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span>
+      </div>
+      <h2>Kendini Tanıt</h2>
+      <p id="setupQuestionCounter">Soru 1 / 9</p>
+    </div>
+    <div id="setupQuestionBox" class="setup-question-box"></div>
+    <div style="display:flex;gap:10px;margin-top:12px;">
+      <button class="btn btn-cancel" id="setupQPrevBtn" onclick="setupQPrev()" style="display:none;flex:1;margin-top:0;">← Geri</button>
+      <button class="btn" id="setupQNextBtn" onclick="setupQNext()" style="flex:1;margin-top:0;">Devam →</button>
+    </div>
+  </div>
+
+  <!-- ADIM 3: STATS -->
+  <div id="setupStep3" style="display:none;">
+    <div class="setup-header">
+      <div class="setup-step-indicator">
+        <span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span><span class="step-dot"></span>
+      </div>
+      <h2>Kendini Puanla</h2>
+      <p>Her kategori için 1–100 arasında puan ver</p>
+    </div>
+    <div class="setup-sliders">
+      <div class="setup-slider-row">
+        <label>⚡ Hız <span id="sliderValHiz">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderHiz" oninput="document.getElementById('sliderValHiz').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>🎯 Şut <span id="sliderValSut">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderSut" oninput="document.getElementById('sliderValSut').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>🎮 Pas <span id="sliderValPas">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderPas" oninput="document.getElementById('sliderValPas').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>🏃 Kondisyon <span id="sliderValKon">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderKon" oninput="document.getElementById('sliderValKon').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>🛡️ Defans <span id="sliderValDef">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderDef" oninput="document.getElementById('sliderValDef').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>💪 Fizik <span id="sliderValFiz">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderFiz" oninput="document.getElementById('sliderValFiz').textContent=this.value">
+      </div>
+      <div class="setup-slider-row">
+        <label>👁️ Oyun Görüşü <span id="sliderValOG">50</span></label>
+        <input type="range" min="1" max="100" value="50" id="sliderOG" oninput="document.getElementById('sliderValOG').textContent=this.value">
+      </div>
+    </div>
+    <button class="btn" style="width:100%;" onclick="setupGoStep4()">Devam Et →</button>
+  </div>
+
+
+  <!-- ADIM 4: KARAKTERİSTİK -->
+  <div id="setupStep4" style="display:none;">
+    <div class="setup-header">
+      <div class="setup-step-indicator">
+        <span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot done"></span><span class="step-dot active"></span>
+      </div>
+      <h2>Oyun Karakterini Seç</h2>
+      <p>Futbol karakteristiğini seç. En fazla 3 özellik seçebilirsin.</p>
+    </div>
+    <div id="setupTraitPicker" class="trait-picker setup-traits"></div>
+    <button class="btn" style="width:100%;margin-top:16px;" onclick="setupFinish()">Profili Tamamla ✓</button>
+  </div>
+
+</div>
+</div>
+
+<!-- MOBİL ALT NAVBAR -->
+<div id="mobileNav" class="mobile-nav" style="display:none;">
+
+    <!-- Profil Tab -->
+    <div class="mob-tab" onclick="mobileTabToggle('mob-profil-menu')">
+        <span class="mob-icon">👤</span>
+        <span class="mob-label">Profil</span>
+    </div>
+
+    <!-- Oyuncular Tab -->
+    <div class="mob-tab" onclick="showPage('oyuncular'); closeMobileMenus();">
+        <span class="mob-icon">⚽</span>
+        <span class="mob-label">Oyuncular</span>
+    </div>
+
+    <!-- Kadro Tab -->
+    <div class="mob-tab" onclick="mobileTabToggle('mob-kadro-menu')">
+        <span class="mob-icon">🗓</span>
+        <span class="mob-label">Kadro</span>
+    </div>
+
+    <!-- İstatistik Tab -->
+    <div class="mob-tab" onclick="mobileTabToggle('mob-stat-menu')">
+        <span class="mob-icon">📊</span>
+        <span class="mob-label">İstatistik</span>
+    </div>
+
+    <!-- Gelişmiş Tab -->
+    <div class="mob-tab" onclick="mobileTabToggle('mob-advanced-menu')">
+        <span class="mob-icon">🚀</span>
+        <span class="mob-label">Pro</span>
+    </div>
+
+    <!-- Çıkış Tab -->
+    <div class="mob-tab" onclick="logoutUser()">
+        <span class="mob-icon">🚪</span>
+        <span class="mob-label">Çıkış</span>
+    </div>
+
+    <!-- Profil Alt Menü -->
+    <div id="mob-profil-menu" class="mob-submenu">
+        <button onclick="showPage('profilim'); closeMobileMenus();">🏠 Profilim</button>
+        <button id="mobAdminBtn" style="display:none;" onclick="showPage('admin'); closeMobileMenus();">⚙️ Admin Paneli</button>
+        <button id="mobGaBtn" style="display:none;" onclick="showPage('gaYonetim'); closeMobileMenus();">⚽ Gol Yönetimi</button>
+        <button id="mobWinBtn" style="display:none;" onclick="showPage('kazananYonetim'); closeMobileMenus();">🏆 Kazanan Yönetimi</button>
+    </div>
+
+    <!-- Kadro Alt Menü -->
+    <div id="mob-kadro-menu" class="mob-submenu">
+        <button onclick="showPage('haftaninKadro'); closeMobileMenus();">📋 Haftanın Kadrosu</button>
+        <button id="mobKadroBtn" style="display:none;" onclick="showPage('kadro'); closeMobileMenus();">🔧 Kadro Oluştur</button>
+    </div>
+
+    <!-- İstatistik Alt Menü -->
+    <div id="mob-stat-menu" class="mob-submenu">
+        <button onclick="showPage('gecmis'); closeMobileMenus();">📜 Puan Geçmişi</button>
+        <button onclick="showPage('formAnalizi'); closeMobileMenus();">📈 Form Analizi</button>
+        <button onclick="showPage('chemistry'); closeMobileMenus();">🧪 Chemistry</button>
+        <button onclick="showPage('market'); closeMobileMenus();">💰 Market</button>
+        <button onclick="showPage('proLigMotoru'); closeMobileMenus();">🏆 Pro Lig Motoru</button>
+    </div>
+
+    <!-- Gelişmiş Alt Menü -->
+    <div id="mob-advanced-menu" class="mob-submenu">
+        <button onclick="showPage('karsilastirma'); closeMobileMenus();">⚔️ Karşılaştır</button>
+        <button onclick="showPage('attendanceTahmin'); closeMobileMenus();">🧠 Katılım Tahmini</button>
+        <button onclick="showPage('sosyalPro'); closeMobileMenus();">💬 Sosyal Pro</button>
+        <button onclick="showPage('pushMerkezi'); closeMobileMenus();">🔔 Akıllı Bildirim</button>
+    </div>
+
+</div>
+
+<script>
+  // Landing'den gelmediyse oraya yönlendir
+  if (!document.referrer.includes('landing.html') && 
+    !sessionStorage.getItem('fromLanding') &&
+    !sessionStorage.getItem('hsSessionAlive')) {
+    window.location.href = './landing.html';
+}
+// hsSessionAlive main.js auth akışında set edilir; tarayıcı kapanınca temizlenir.
+</script>
+<!-- PUANLAMA MODAL — body seviyesinde -->
+<div id="rateModal" style="display:none;position:fixed;inset:0;
+    background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);
+    z-index:1500;align-items:center;justify-content:center;">
+    <div style="background:rgba(20,10,40,0.97);border:1px solid rgba(138,43,255,0.4);
+        border-radius:20px;padding:28px;width:90%;max-width:420px;
+        box-shadow:0 0 40px rgba(138,43,255,0.3);max-height:90vh;overflow-y:auto;">
+        <h2 id="ratePlayerName" style="margin:0 0 20px;font-size:20px;font-weight:700;
+            color:#a78bfa;text-align:center;"></h2>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">ŞUT</label>
+            <input type="number" id="rate-sut" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">PAS</label>
+            <input type="number" id="rate-pas" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">KONDİSYON</label>
+            <input type="number" id="rate-kond" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">HIZ</label>
+            <input type="number" id="rate-hiz" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">FİZİK</label>
+            <input type="number" id="rate-fizik" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">DEFANS</label>
+            <input type="number" id="rate-def" min="0" max="100" style="margin-top:4px;"></div>
+            <div><label style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:600;">OYUN GÖRÜŞÜ</label>
+            <input type="number" id="rate-oyunGorusu" min="0" max="100" style="margin-top:4px;"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+            <button id="saveRating" class="btn" style="flex:1;margin-top:0;">Kaydet</button>
+            <button onclick="closeRatePanel()" class="btn btn-cancel" style="flex:1;margin-top:0;">Kapat</button>
+        </div>
+    </div>
+</div>
+<div id="profileAnalysisModal" style="display:none;position:fixed;inset:0;
+background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:2000;
+align-items:center;justify-content:center;">
+    <div style="background:rgba(20,10,40,0.97);border:1px solid rgba(138,43,255,0.4);
+    border-radius:20px;padding:28px;width:95%;max-width:680px;
+    box-shadow:0 0 40px rgba(138,43,255,0.3);text-align:center;">
+        <div style="font-size:32px;margin-bottom:12px;">📊</div>
+        <h3 style="margin:0 0 16px;font-size:18px;font-weight:700;color:#a78bfa;">Profil Analizin</h3>
+        <div id="profileAnalysisContent" style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.85);"></div>
+        <button onclick="document.getElementById('profileAnalysisModal').style.display='none'"
+            style="margin-top:20px;width:100%;padding:12px;border-radius:10px;
+            border:2px solid #a347ff;background:transparent;color:white;
+            font-size:15px;font-weight:700;cursor:pointer;font-family:Poppins,sans-serif;">
+            Harika! 🎉
+        </button>
+    </div>
+</div>
+
+</body></html>

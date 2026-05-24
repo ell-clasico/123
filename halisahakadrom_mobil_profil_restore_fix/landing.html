@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://halisahakadrom.com/landing.html -->
+<html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HalısahaKadrom — Halı Saha Yönetim Platformu</title>
+<link href="./HalısahaKadrom — Halı Saha Yönetim Platformu_files/css2" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --purple: #8a2bff;
+  --purple-light: #a78bfa;
+  --purple-dark: #6d1fd4;
+  --purple-glow: rgba(138, 43, 255, 0.35);
+  --bg: #05010f;
+  --card-bg: rgba(255,255,255,0.04);
+  --border: rgba(138, 43, 255, 0.3);
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,0.55);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── ARKAPLAN ── */
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(138,43,255,0.18) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 40% at 10% 80%, rgba(100,20,200,0.12) 0%, transparent 55%),
+              var(--bg);
+}
+
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04;
+  background-image: linear-gradient(rgba(138,43,255,1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(138,43,255,1) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(5,1,15,0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(138,43,255,0.15);
+}
+
+.nav-logo {
+  font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--purple), #b46aff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 900; color: white;
+  box-shadow: 0 0 16px var(--purple-glow);
+}
+.nav-logo span { color: var(--purple-light); }
+
+.nav-btn {
+  padding: 10px 28px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+  color: white; font-family: 'Poppins', sans-serif;
+  font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+  box-shadow: 0 0 20px var(--purple-glow);
+  transition: all 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(138,43,255,0.6); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 18px; border-radius: 100px;
+  background: rgba(138,43,255,0.12);
+  border: 1px solid rgba(138,43,255,0.35);
+  font-size: 13px; font-weight: 600; color: var(--purple-light);
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.hero-title {
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 900; line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-title .accent {
+  background: linear-gradient(135deg, #a78bfa, #e879f9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--text-muted); max-width: 560px;
+  line-height: 1.7; margin-bottom: 48px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  padding: 16px 40px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--purple), #b46aff);
+  color: white; font-family: 'Poppins', sans-serif;
+  font-size: 16px; font-weight: 700; border: none; cursor: pointer;
+  box-shadow: 0 0 30px var(--purple-glow), 0 4px 20px rgba(0,0,0,0.4);
+  transition: all 0.25s; text-decoration: none; display: inline-block;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(138,43,255,0.7), 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.btn-secondary {
+  padding: 16px 40px; border-radius: 16px;
+  background: transparent; color: white;
+  font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600;
+  border: 1.5px solid rgba(255,255,255,0.2); cursor: pointer;
+  transition: all 0.25s; text-decoration: none; display: inline-block;
+}
+.btn-secondary:hover {
+  border-color: var(--purple-light);
+  background: rgba(138,43,255,0.1);
+}
+
+/* ── HERO STATS ── */
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 72px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-size: 36px; font-weight: 900; color: white;
+  background: linear-gradient(135deg, #fff, var(--purple-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── FEATURES ── */
+.section {
+  position: relative; z-index: 1;
+  padding: 100px 24px;
+  max-width: 1100px; margin: 0 auto;
+}
+
+.section-tag {
+  font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  color: var(--purple-light); text-transform: uppercase;
+  margin-bottom: 12px; display: block;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800; letter-spacing: -1px; margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 17px; color: var(--text-muted);
+  max-width: 520px; line-height: 1.7; margin-bottom: 60px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 20px;
+  background: radial-gradient(ellipse at top left, rgba(138,43,255,0.1), transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.feature-card:hover { border-color: rgba(138,43,255,0.6); transform: translateY(-4px); }
+.feature-card:hover::before { opacity: 1; }
+
+.feature-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(138,43,255,0.15);
+  border: 1px solid rgba(138,43,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 20px;
+}
+.feature-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* ── EKRAN GÖRÜNTÜLERİ (mockup) ── */
+.mockup-section {
+  position: relative; z-index: 1;
+  padding: 60px 24px 100px;
+  text-align: center;
+}
+
+.mockup-wrap {
+  max-width: 900px; margin: 60px auto 0;
+  background: rgba(138,43,255,0.06);
+  border: 1px solid rgba(138,43,255,0.25);
+  border-radius: 28px; padding: 32px;
+  box-shadow: 0 0 80px rgba(138,43,255,0.15);
+}
+
+.mockup-bar {
+  display: flex; gap: 6px; margin-bottom: 20px;
+}
+.mockup-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.mockup-dot:nth-child(1) { background: #ff5f56; }
+.mockup-dot:nth-child(2) { background: #ffbd2e; }
+.mockup-dot:nth-child(3) { background: #27c93f; }
+
+.mockup-screen {
+  background: rgba(10,3,25,0.8);
+  border-radius: 16px; padding: 24px;
+  border: 1px solid rgba(138,43,255,0.2);
+  min-height: 320px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+
+.mock-card {
+  background: rgba(138,43,255,0.12);
+  border: 1px solid rgba(138,43,255,0.3);
+  border-radius: 14px; padding: 20px;
+  text-align: left;
+}
+.mock-card-title { font-size: 13px; font-weight: 700; color: var(--purple-light); margin-bottom: 8px; }
+.mock-player {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mock-player:last-child { border-bottom: none; }
+.mock-avatar {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple), #b46aff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+.mock-name { font-size: 13px; font-weight: 600; }
+.mock-pos { font-size: 11px; color: var(--text-muted); }
+.mock-ovr {
+  margin-left: auto; font-size: 13px; font-weight: 800;
+  color: #fbbf24;
+}
+
+.mock-field {
+  background: rgba(20,80,30,0.3);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 14px; padding: 16px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mock-field-lines {
+  position: absolute; inset: 0; opacity: 0.15;
+  background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.mock-field-text {
+  position: relative; font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.7); text-align: center;
+}
+.mock-score {
+  font-size: 32px; font-weight: 900;
+  background: linear-gradient(135deg, #fff, var(--purple-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── CTA ── */
+.cta-section {
+  position: relative; z-index: 1;
+  padding: 80px 24px 120px; text-align: center;
+}
+
+.cta-box {
+  max-width: 700px; margin: 0 auto;
+  background: rgba(138,43,255,0.08);
+  border: 1px solid rgba(138,43,255,0.35);
+  border-radius: 28px; padding: 60px 40px;
+  box-shadow: 0 0 60px rgba(138,43,255,0.12);
+  position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: '';
+  position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at center, rgba(138,43,255,0.12), transparent 60%);
+  pointer-events: none;
+}
+.cta-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 900; margin-bottom: 16px; letter-spacing: -1px;
+}
+.cta-sub {
+  font-size: 16px; color: var(--text-muted);
+  margin-bottom: 36px; line-height: 1.7;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-size: 16px; font-weight: 800; }
+.footer-logo span { color: var(--purple-light); }
+.footer-text { font-size: 13px; color: var(--text-muted); }
+
+/* ── ANİMASYONLAR ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBİL ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 28px; }
+  .mockup-screen { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">H</div>
+    Halısaha<span>Kadrom</span>
+  </div>
+  <a href="https://halisahakadrom.com/app.html" class="nav-btn" onclick="goToLogin(event)">Giriş Yap</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Halı saha yönetimi artık çok kolay</div>
+
+  <h1 class="hero-title">
+    Takımını oluştur,<br>
+    <span class="accent">sahaya hükmet.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Halı saha grubunu yönet, kadroları dengeli oluştur, istatistikleri takip et. Tüm bunları tek bir platformda.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://halisahakadrom.com/landing.html#" class="btn-primary" onclick="goToLogin(event)">Hemen Başla — Ücretsiz</a>
+    <a href="https://halisahakadrom.com/landing.html#features" class="btn-secondary">Özellikleri Keşfet</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">6v6</div>
+      <div class="stat-label">11v11'e kadar format</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">⚡</div>
+      <div class="stat-label">Anlık kadro analizi</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">AI</div>
+      <div class="stat-label">Maç tahmini</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Gruba kadar ücretsiz</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <span class="section-tag">Özellikler</span>
+  <h2 class="section-title">Her şey tek platformda</h2>
+  <p class="section-sub">Halı saha grubunu yönetmek için ihtiyacın olan her araç burada.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚖️</div>
+      <div class="feature-title">Dengeli Kadro Algoritması</div>
+      <div class="feature-desc">Oyuncuların OVR, mevki ve istatistiklerini analiz ederek iki takımı mümkün olduğunca dengeli dağıtır.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">Yapay Zeka Maç Analizi</div>
+      <div class="feature-desc">Kadro oluşturulduktan sonra AI, güçlü-zayıf noktaları, kilit düelleri ve maç tahminini analiz eder.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Gol Krallığı &amp; İstatistik</div>
+      <div class="feature-desc">Sezon boyunca gol, kazanma ve puan verilerini takip et. En iyi oyuncuları sıralı gör.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <div class="feature-title">Grup Yönetimi</div>
+      <div class="feature-desc">Kendi grubunu oluştur, arkadaşlarını davet et. Katılım isteklerini admin olarak yönet.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚽</div>
+      <div class="feature-title">Haftalık Katılım Sistemi</div>
+      <div class="feature-desc">Oyuncular maça gelip gelmeyeceklerini bildirir, sistem otomatik sıralama yapar.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🃏</div>
+      <div class="feature-title">FIFA Kartı Profili</div>
+      <div class="feature-desc">Her oyuncunun şut, pas, hız, defans gibi özellikleri FIFA kartı formatında görüntülenir.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP -->
+<section class="mockup-section">
+  <span class="section-tag" style="display:block; margin-bottom:12px;">Uygulama</span>
+  <h2 class="section-title" style="font-size:clamp(28px,4vw,44px); font-weight:800; letter-spacing:-1px;">Gerçek zamanlı kadro ekranı</h2>
+
+  <div class="mockup-wrap">
+    <div class="mockup-bar">
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+    </div>
+    <div class="mockup-screen">
+      <div class="mock-card">
+        <div class="mock-card-title">🔴 A TAKIMI</div>
+        <div class="mock-player">
+          <div class="mock-avatar">ST</div>
+          <div><div class="mock-name">Halil</div><div class="mock-pos">Santrafor</div></div>
+          <div class="mock-ovr">87</div>
+        </div>
+        <div class="mock-player">
+          <div class="mock-avatar">CM</div>
+          <div><div class="mock-name">Abdullah</div><div class="mock-pos">Orta Saha</div></div>
+          <div class="mock-ovr">81</div>
+        </div>
+        <div class="mock-player">
+          <div class="mock-avatar">CB</div>
+          <div><div class="mock-name">Berk</div><div class="mock-pos">Stoper</div></div>
+          <div class="mock-ovr">79</div>
+        </div>
+        <div class="mock-player">
+          <div class="mock-avatar">GK</div>
+          <div><div class="mock-name">Cemil</div><div class="mock-pos">Kaleci</div></div>
+          <div class="mock-ovr">75</div>
+        </div>
+      </div>
+
+      <div class="mock-field">
+        <div class="mock-field-lines"></div>
+        <div class="mock-field-text">
+          <div style="font-size:11px; opacity:0.7; margin-bottom:8px;">HAFTALIK MAÇ</div>
+          <div class="mock-score">A  vs  B</div>
+          <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+            <div style="background:rgba(138,43,255,0.2); border:1px solid rgba(138,43,255,0.4); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700;">OVR 82</div>
+            <div style="background:rgba(96,179,255,0.2); border:1px solid rgba(96,179,255,0.4); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700;">OVR 81</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2 class="cta-title">Hemen başla, ücretsiz.</h2>
+    <p class="cta-sub">Kayıt ol, grubunu oluştur ve ilk kadroyu dakikalar içinde hazırla.</p>
+    <a href="https://halisahakadrom.com/landing.html#" class="btn-primary" onclick="goToLogin(event)" style="font-size:17px; padding:18px 52px;">Ücretsiz Kayıt Ol</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Halısaha<span>Kadrom</span></div>
+  <div class="footer-text">Halı saha yönetim platformu</div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+    <a href="./gizlilik-politikasi.html" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;">Gizlilik Politikası</a>
+    <a href="./kullanim-kosullari.html" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;">Kullanım Koşulları</a>
+    <a href="./kvkk.html" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;">KVKK</a>
+    <a href="mailto:iletisim@halisahakadrom.com" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;">İletişim</a>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.2);">© 2026 HalısahaKadrom. Tüm hakları saklıdır.</div>
+</footer>
+
+<script>
+function goToLogin(e) {
+  e.preventDefault();
+  sessionStorage.setItem('fromLanding', '1');
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.3s';
+  setTimeout(() => { window.location.href = './index.html'; }, 300);
+}
+</script>
+
+
+
+</body></html>

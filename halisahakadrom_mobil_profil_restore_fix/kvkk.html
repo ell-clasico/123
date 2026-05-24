@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KVKK Aydınlatma Metni — HalısahaKadrom</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --purple: #8a2bff; --purple-light: #a78bfa;
+  --bg: #05010f; --border: rgba(138,43,255,0.3);
+  --text-muted: rgba(255,255,255,0.6);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; line-height: 1.8; }
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 10%, rgba(138,43,255,0.12) 0%, transparent 60%), var(--bg);
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(5,1,15,0.8); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(138,43,255,0.15);
+}
+.nav-logo { font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; color: white; }
+.nav-logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), #b46aff); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; }
+.nav-logo span { color: var(--purple-light); }
+.nav-back { padding: 8px 20px; border-radius: 10px; border: 1.5px solid var(--border); background: transparent; color: white; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.container { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; position: relative; z-index: 1; }
+.page-title { font-size: 36px; font-weight: 900; margin-bottom: 8px; }
+.page-title span { color: var(--purple-light); }
+.page-date { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+.section { margin-bottom: 40px; padding: 28px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; }
+.section h2 { font-size: 18px; font-weight: 700; color: var(--purple-light); margin-bottom: 14px; }
+.section p { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+.section ul { padding-left: 20px; }
+.section ul li { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+.table-wrap { overflow-x: auto; margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: rgba(138,43,255,0.2); color: var(--purple-light); padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+td { padding: 10px 14px; color: var(--text-muted); border: 1px solid rgba(138,43,255,0.15); vertical-align: top; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.highlight { background: rgba(138,43,255,0.1); border: 1px solid rgba(138,43,255,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 40px; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 48px; text-align: center; font-size: 13px; color: var(--text-muted); }
+footer a { color: var(--purple-light); text-decoration: none; }
+@media (max-width: 768px) { nav { padding: 14px 20px; } .container { padding: 90px 16px 60px; } .page-title { font-size: 26px; } }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+
+<nav>
+  <a href="./landing.html" class="nav-logo">
+    <div class="nav-logo-icon">H</div>
+    Halısaha<span>Kadrom</span>
+  </a>
+  <a href="./landing.html" class="nav-back">← Geri Dön</a>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">KVKK <span>Aydınlatma Metni</span></h1>
+  <p class="page-date">Son güncelleme: Nisan 2026</p>
+
+  <div class="highlight">
+    Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 10. maddesi kapsamında veri sorumlusu sıfatıyla HalısahaKadrom tarafından hazırlanmıştır.
+  </div>
+
+  <div class="section">
+    <h2>1. Veri Sorumlusu</h2>
+    <p>Kişisel verileriniz, <strong>HalısahaKadrom</strong> tarafından veri sorumlusu sıfatıyla işlenmektedir.</p>
+    <p>İletişim: <strong>iletisim@halisahakadrom.com</strong></p>
+  </div>
+
+  <div class="section">
+    <h2>2. İşlenen Kişisel Veriler ve Amaçları</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Veri Kategorisi</th>
+            <th>İşlenen Veriler</th>
+            <th>İşleme Amacı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kimlik</td>
+            <td>Ad, kullanıcı adı</td>
+            <td>Hesap oluşturma ve tanımlama</td>
+          </tr>
+          <tr>
+            <td>İletişim</td>
+            <td>E-posta adresi</td>
+            <td>Hesap doğrulama, şifre sıfırlama</td>
+          </tr>
+          <tr>
+            <td>Profil</td>
+            <td>Mevki, oyun istatistikleri, profil fotoğrafı</td>
+            <td>Platform özelliklerinin sunulması</td>
+          </tr>
+          <tr>
+            <td>İşlem</td>
+            <td>Giriş tarihi/saati, grup üyelikleri</td>
+            <td>Platform güvenliği ve yönetimi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. Kişisel Verilerin İşlenme Hukuki Sebebi</h2>
+    <p>Kişisel verileriniz aşağıdaki hukuki sebeplere dayanılarak işlenmektedir:</p>
+    <ul>
+      <li><strong>Sözleşmenin kurulması ve ifası:</strong> Kullanım koşullarının yerine getirilmesi amacıyla</li>
+      <li><strong>Açık rıza:</strong> Profil fotoğrafı gibi zorunlu olmayan veriler için</li>
+      <li><strong>Meşru menfaat:</strong> Platform güvenliği ve hizmet kalitesinin iyileştirilmesi için</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Kişisel Verilerin Aktarımı</h2>
+    <p>Kişisel verileriniz aşağıdaki durumlarda üçüncü taraflarla paylaşılabilir:</p>
+    <ul>
+      <li><strong>Google Firebase (ABD):</strong> Veri tabanı ve kimlik doğrulama altyapısı olarak — GDPR ve KVKK uyumlu standart sözleşme hükümleri kapsamında</li>
+      <li><strong>Yasal yükümlülükler:</strong> Yetkili kamu kurum ve kuruluşlarının talepleri doğrultusunda</li>
+    </ul>
+    <p>Verileriniz başka hiçbir üçüncü tarafla paylaşılmaz, satılmaz veya kiralanmaz.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Kişisel Verilerin Saklanma Süresi</h2>
+    <p>Kişisel verileriniz hesabınız aktif olduğu sürece saklanır. Hesabınızı kapatmanız halinde verileriniz 30 gün içinde sistemden kalıcı olarak silinir. Yasal zorunluluk gerektiren veriler ilgili mevzuatta öngörülen süre boyunca saklanır.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. KVKK Kapsamındaki Haklarınız</h2>
+    <p>KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+    <ul>
+      <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+      <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li>
+      <li>Kişisel verilerinizin işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+      <li>Yurt içinde veya yurt dışında kişisel verilerinizin aktarıldığı üçüncü kişileri bilme</li>
+      <li>Kişisel verilerinizin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme</li>
+      <li>KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerinizin silinmesini veya yok edilmesini isteme</li>
+      <li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+      <li>Kişisel verilerinizin kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+    </ul>
+    <p style="margin-top:12px;">Haklarınızı kullanmak için <strong>iletisim@halisahakadrom.com</strong> adresine yazılı başvuruda bulunabilirsiniz. Başvurularınız en geç 30 gün içinde yanıtlanacaktır.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 HalısahaKadrom — <a href="./gizlilik-politikasi.html">Gizlilik Politikası</a> · <a href="./kullanim-kosullari.html">Kullanım Koşulları</a> · <a href="./kvkk.html">KVKK</a></p>
+</footer>
+</body>
+</html>

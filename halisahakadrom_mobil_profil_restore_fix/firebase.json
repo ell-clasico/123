@@ -1,0 +1,120 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/oyuncular",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/haftalik-kadro",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/kadro",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/puan-ver",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/puan-gecmisi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/gol-kralligi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/kazananlar",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/en-iyi-oyuncular",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/admin",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/gol-yonetimi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/kazanan-yonetimi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/mac-videolari",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/video-detay",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/profilim",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/dashboard",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/form-analizi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/chemistry",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/market",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/oyuncu-karsilastirma",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/elite-merkez",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/katilim-tahmini",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/pro-lig-motoru",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/sosyal-pro",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/push-merkezi",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/",
+        "destination": "/landing.html"
+      },
+      {
+        "source": "/join",
+        "destination": "/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

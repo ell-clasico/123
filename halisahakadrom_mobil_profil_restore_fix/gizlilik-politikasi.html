@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gizlilik Politikası — HalısahaKadrom</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --purple: #8a2bff; --purple-light: #a78bfa;
+  --bg: #05010f; --border: rgba(138,43,255,0.3);
+  --text-muted: rgba(255,255,255,0.6);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; line-height: 1.8; }
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(138,43,255,0.12) 0%, transparent 60%), var(--bg);
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(5,1,15,0.8); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(138,43,255,0.15);
+}
+.nav-logo { font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; color: white; }
+.nav-logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), #b46aff); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; }
+.nav-logo span { color: var(--purple-light); }
+.nav-back { padding: 8px 20px; border-radius: 10px; border: 1.5px solid var(--border); background: transparent; color: white; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.container { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; position: relative; z-index: 1; }
+.page-title { font-size: 36px; font-weight: 900; margin-bottom: 8px; }
+.page-title span { color: var(--purple-light); }
+.page-date { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+.section { margin-bottom: 40px; padding: 28px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; }
+.section h2 { font-size: 18px; font-weight: 700; color: var(--purple-light); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.section p { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+.section ul { padding-left: 20px; }
+.section ul li { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
+.highlight { background: rgba(138,43,255,0.1); border: 1px solid rgba(138,43,255,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 40px; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 48px; text-align: center; font-size: 13px; color: var(--text-muted); }
+footer a { color: var(--purple-light); text-decoration: none; }
+@media (max-width: 768px) { nav { padding: 14px 20px; } .container { padding: 90px 16px 60px; } .page-title { font-size: 26px; } }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+
+<nav>
+  <a href="./landing.html" class="nav-logo">
+    <div class="nav-logo-icon">H</div>
+    Halısaha<span>Kadrom</span>
+  </a>
+  <a href="./landing.html" class="nav-back">← Geri Dön</a>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">Gizlilik <span>Politikası</span></h1>
+  <p class="page-date">Son güncelleme: Nisan 2026</p>
+
+  <div class="highlight">
+    HalısahaKadrom olarak kişisel verilerinizin güvenliğine önem veriyoruz. Bu politika, hangi verileri topladığımızı, nasıl kullandığımızı ve nasıl koruduğumuzu açıklar.
+  </div>
+
+  <div class="section">
+    <h2>📋 1. Toplanan Veriler</h2>
+    <p>Platformumuzu kullanırken aşağıdaki veriler toplanmaktadır:</p>
+    <ul>
+      <li><strong>Hesap bilgileri:</strong> Ad, e-posta adresi, şifre (şifrelenmiş olarak saklanır)</li>
+      <li><strong>Profil bilgileri:</strong> Kullanıcı adı, mevki tercihleri, oyun istatistikleri, profil fotoğrafı</li>
+      <li><strong>Kullanım verileri:</strong> Platforma giriş tarihleri ve saatleri, hangi grupların üyesi olunduğu</li>
+      <li><strong>İçerik verileri:</strong> Maç katılım bildirimleri, gol/istatistik kayıtları</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🎯 2. Verilerin Kullanım Amacı</h2>
+    <p>Toplanan veriler yalnızca aşağıdaki amaçlarla kullanılmaktadır:</p>
+    <ul>
+      <li>Hesabınızı oluşturmak ve yönetmek</li>
+      <li>Halı saha kadro ve istatistik özelliklerini sunmak</li>
+      <li>Grup üyeliği ve yönetimini gerçekleştirmek</li>
+      <li>Platform güvenliğini sağlamak</li>
+      <li>Hizmet kalitesini iyileştirmek</li>
+    </ul>
+    <p>Verileriniz hiçbir koşulda üçüncü taraflara satılmaz veya pazarlama amacıyla paylaşılmaz.</p>
+  </div>
+
+  <div class="section">
+    <h2>🔒 3. Veri Güvenliği</h2>
+    <p>Verileriniz Google Firebase altyapısında güvenli şekilde saklanmaktadır. Firebase, Google'ın güvenlik standartlarına uygun olarak verilerinizi şifreli biçimde depolar.</p>
+    <p>Şifreleriniz hiçbir zaman düz metin olarak saklanmaz; Firebase Authentication tarafından güvenli şekilde yönetilir.</p>
+  </div>
+
+  <div class="section">
+    <h2>🍪 4. Çerezler ve Yerel Depolama</h2>
+    <p>Platformumuz oturum yönetimi ve tercihlerinizi hatırlamak amacıyla tarayıcı yerel depolamasını (localStorage / sessionStorage) kullanmaktadır. Bu veriler yalnızca cihazınızda saklanır ve sunucularımıza gönderilmez.</p>
+  </div>
+
+  <div class="section">
+    <h2>👤 5. Kullanıcı Hakları (KVKK)</h2>
+    <p>6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında aşağıdaki haklara sahipsiniz:</p>
+    <ul>
+      <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+      <li>Verilerinizin düzeltilmesini talep etme</li>
+      <li>Verilerinizin silinmesini talep etme</li>
+      <li>Verilerinizin işlenmesine itiraz etme</li>
+      <li>Verilerinizin taşınabilirliğini talep etme</li>
+    </ul>
+    <p>Bu haklarınızı kullanmak için <strong>iletisim@halisahakadrom.com</strong> adresinden bize ulaşabilirsiniz.</p>
+  </div>
+
+  <div class="section">
+    <h2>🔗 6. Üçüncü Taraf Hizmetler</h2>
+    <p>Platformumuz aşağıdaki üçüncü taraf hizmetleri kullanmaktadır:</p>
+    <ul>
+      <li><strong>Google Firebase:</strong> Kimlik doğrulama, veri tabanı ve dosya depolama</li>
+      <li><strong>Google Fonts:</strong> Yazı tipi yükleme</li>
+      <li><strong>Google AdSense:</strong> Reklam gösterimi (uygulanabildiği durumlarda)</li>
+    </ul>
+    <p>Bu hizmetlerin kendi gizlilik politikaları geçerlidir.</p>
+  </div>
+
+  <div class="section">
+    <h2>📅 7. Veri Saklama Süresi</h2>
+    <p>Hesabınız aktif olduğu sürece verileriniz saklanır. Hesabınızı silmek istediğinizde tüm kişisel verileriniz platformumuzdan kalıcı olarak silinir. Silme talebinizi <strong>iletisim@halisahakadrom.com</strong> adresine iletebilirsiniz.</p>
+  </div>
+
+  <div class="section">
+    <h2>✏️ 8. Politika Değişiklikleri</h2>
+    <p>Bu gizlilik politikası gerektiğinde güncellenebilir. Önemli değişiklikler olması durumunda kullanıcılar platform üzerinden bilgilendirilir. Güncel politikaya her zaman bu sayfadan ulaşabilirsiniz.</p>
+  </div>
+
+  <div class="section">
+    <h2>📬 9. İletişim</h2>
+    <p>Gizlilik politikamız hakkında sorularınız için:</p>
+    <ul>
+      <li><strong>E-posta:</strong> iletisim@halisahakadrom.com</li>
+      <li><strong>Web:</strong> halisahakadrom.com</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 HalısahaKadrom — <a href="./gizlilik-politikasi.html">Gizlilik Politikası</a> · <a href="./kullanim-kosullari.html">Kullanım Koşulları</a> · <a href="./kvkk.html">KVKK</a></p>
+</footer>
+</body>
+</html>
